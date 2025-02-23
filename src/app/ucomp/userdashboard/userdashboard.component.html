@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar (Visible on Medium & Larger Screens) -->
+        <div class="col-md-2 d-flex flex-column p-0 bg-dark text-white vh-100 d-none d-md-flex" id="sidebar">
+            <nav class="navbar navbar-dark bg-dark flex-column w-100 p-3">
+                <h3 class="text-primary text-center navbar-brand mb-4">Hello {{ empName }}</h3>
+                <ul class="navbar-nav w-100">
+                    <li class="nav-item p-2"><a routerLink="/user/viewdetails" class="nav-link text-white">View Your Details</a></li>
+                    <li class="nav-item p-2"><a routerLink="/user/viewleaves" class="nav-link text-white">My Leaves</a></li>
+                    <li class="nav-item p-2"><a routerLink="#" class="nav-link text-white" (click)="Logout()">LogOut</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Top Navbar for Small Screens -->
+        <div class="col-12 bg-dark d-flex d-md-none justify-content-between align-items-center p-2">
+            <button class="navbar-toggler text-white" type="button" (click)="toggleSidebar()">
+                ☰
+            </button>
+            <h3 class="text-primary m-0 text-center">Hello {{ empName }}</h3>
+        </div>
+
+        <!-- Collapsible Sidebar for Small Screens -->
+        <div class="col-12 bg-dark text-white d-md-none" [ngClass]="{'d-block': isSidebarOpen, 'd-none': !isSidebarOpen}">
+            <ul class="navbar-nav w-100 p-3">
+                <li class="nav-item p-2"><a routerLink="/user/viewdetails" class="nav-link text-white">View Your Details</a></li>
+                <li class="nav-item p-2"><a routerLink="/user/viewleaves" class="nav-link text-white">My Leaves</a></li>
+                <li class="nav-item p-2"><a routerLink="#" class="nav-link text-white" (click)="Logout()">LogOut</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 p-3">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+

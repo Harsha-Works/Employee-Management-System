@@ -1,0 +1,17 @@
+.full-screen-img {
+  position: fixed;  /* Ensures it covers the whole screen */
+  top: 0;
+  left: 0;
+  width: 100vw;  /* Full width of viewport */
+  height: 100vh; /* Full height of viewport */
+  object-fit: cover;  /* Ensures it scales properly */
+  z-index: -1; /* Sends it behind all content */
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  opacity: 0;  /* Initially hidden */
+  transform: scale(1.1); /* Slightly zoomed-in for a smooth effect */
+}
+
+.full-screen-img.show {
+  opacity: 1;  /* Fade in effect */
+  transform: scale(1); /* Zoom-out to normal size */
+}

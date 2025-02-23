@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar (Visible on Medium & Larger Screens) -->
+        <div class="col-md-2 d-flex flex-column p-0 bg-dark text-white vh-100 d-none d-md-flex" id="sidebar">
+            <nav class="navbar navbar-dark bg-dark flex-column w-100 p-3">
+                <a routerLink="/admin/empreport" class="navbar-brand mb-4">
+                    <h3 class="text-primary text-center">HCK Solutions</h3>
+                </a>
+                <ul class="navbar-nav w-100">
+                    <li class="nav-item p-2"><a routerLink="/admin/empreport" class="nav-link text-white">Employee Report</a></li>
+                    <li class="nav-item p-2"><a routerLink="/admin/addemp" class="nav-link text-white">Add Employees</a></li>
+                    <li class="nav-item p-3">
+                        <a routerLink="/admin/leavereq" class="nav-link text-white position-relative">
+                            Leave Requests
+                            <span class="badge leave-badge position-absolute top-0 start-100 translate-middle">{{ len }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item p-2"><a routerLink="#" class="nav-link text-white" (click)="logOut()">LogOut</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Top Navbar for Small Screens -->
+        <div class="col-12 bg-dark d-flex d-md-none justify-content-between align-items-center p-2">
+            <button class="navbar-toggler text-white" type="button" (click)="toggleSidebar()">
+                ☰
+            </button>
+            <h3 class="text-primary m-0 text-center">HCK Solutions</h3>
+        </div>
+
+        <!-- Collapsible Sidebar for Small Screens -->
+        <div class="col-12 bg-dark text-white d-md-none" [ngClass]="{'d-block': isSidebarOpen, 'd-none': !isSidebarOpen}">
+            <ul class="navbar-nav w-100 p-3">
+                <li class="nav-item p-2"><a routerLink="/admin/empreport" class="nav-link text-white">Employee Report</a></li>
+                <li class="nav-item p-2"><a routerLink="/admin/addemp" class="nav-link text-white">Add Employees</a></li>
+                <li class="nav-item p-3">
+                    <a routerLink="/admin/leavereq" class="nav-link text-white position-relative">
+                        Leave Requests
+                        <span class="badge leave-badge position-absolute top-0 start-100 translate-middle">{{ len }}</span>
+                    </a>
+                </li>
+                <li class="nav-item p-2"><a routerLink="#" class="nav-link text-white" (click)="logOut()">LogOut</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 p-3">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+

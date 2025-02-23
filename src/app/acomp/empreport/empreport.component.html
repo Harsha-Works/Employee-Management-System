@@ -1,0 +1,112 @@
+<div class="col-md-12 p-0 w-100 h-100">
+    <router-outlet></router-outlet>
+    <div class="mb-3 position-relative" style="max-width: 500px; margin-left: 0;">
+        <input type="text" class="form-control rounded-pill shadow-sm ps-5 py-2"
+               placeholder="Search here..." [(ngModel)]="eId" (input)="searchEmp()" 
+               style="width: 50px; transition: width 0.4s ease-in-out;" 
+               onfocus="this.style.width='100%'" onblur="this.style.width='50px'">
+        <span class="position-absolute start-0 ps-3 text-secondary">
+            <i class="fas fa-search"></i>
+        </span>
+    </div>  
+    
+    <!-- Scrollable Table Wrapper -->
+    <div class="table-responsive" style="max-height: 900px; overflow-y: auto; position: relative;">
+        <table class="table mt-4 w-100 table-bordered">
+            <thead class="table-primary">
+                <tr class="text-center">
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Contactno</th>
+                    <th scope="col">EmailID</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!eId">
+                <tr class="text-center" *ngFor="let e of emp let i = index" [ngClass]="{ 'table-success': i % 2 !== 0,}">
+                    <td>{{e.empid}}</td>
+                    <td>{{e.name}}</td>
+                    <td>{{e.role}}</td>
+                    <td>{{e.contact}}</td>
+                    <td>{{e.email}}</td>
+                    <td>{{e.salary | currency: 'INR'}}</td>
+                    <td><button class="btn p-0 w-100" (click)="updatetodummy(e)" data-bs-toggle="modal" data-bs-target="#updatemodal"><img src="loading-arrow.png" class="img-fluid" style="max-width: 30px; height: auto;"></button></td>
+                    <td><button class="btn p-0 w-100" (click)="deleteItem(e.empid)"><img src="delete.png" class="img-fluid" style="max-width: 30px; height: auto;"></button></td>
+                </tr>
+                
+            </tbody>
+            <tbody *ngIf="eId">
+                <tr >
+                    <td>{{emp.empid}}</td>
+                    <td>{{emp.name}}</td>
+                    <td>{{emp.role}}</td>
+                    <td>{{emp.contact}}</td>
+                    <td>{{emp.email}}</td>
+                    <td>{{emp.salary | currency: 'INR'}}</td>
+                    <td><button class="btn p-0 w-100" (click)="updatetodummy(emp)" data-bs-toggle="modal" data-bs-target="#updatemodal"><img src="loading-arrow.png" class="img-fluid" style="max-width: 30px; height: auto;"></button></td>
+                    <td><button class="btn p-0 w-100" (click)="deleteItem(emp.empid)"><img src="delete.png" class="img-fluid" style="max-width: 30px; height: auto;"></button></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="btn btn-primary rounded-circle" style="position: fixed; bottom: 20px; right: 20px; display: none;" (click)="scrollToTop()">
+        ↑
+    </button>
+</div>
+
+
+<div class="modal fade" id="updatemodal" *ngIf="dummy">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-fade">
+            <h4>Update the Detaiils</h4>
+            <button class="btn btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row">
+               
+                <div class="form-group col-md-6" >
+                    <label for="" class="form-label">Employee Id</label>
+                    <input type="text" class="form-control" name="eid" disabled [(ngModel)]="dummy.empid">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="" class="form-label">Emplyee Name</label>
+                    <input type="text" class="form-control" name="ename" [(ngModel)]="dummy.name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="" class="form-label">Employee Role</label>
+                    <input type="text" class="form-control" name="erole" [(ngModel)]="dummy.role">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="" class="form-label">Employee Contact</label>
+                    <input type="text" class="form-control" name="econt" [(ngModel)]="dummy.contact">
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="" class="form-label">Employee Email</label>
+                    <input type="text" class="form-control" name="vd" [(ngModel)]="dummy.email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="" class="form-label">Employee Address</label>
+                    <input type="text" class="form-control" name="address" [(ngModel)]="dummy.address">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="" class="form-label">Employee Salary</label>
+                    <input type="number" class="form-control" name="salary" [(ngModel)]="dummy.salary">
+                </div>
+               
+                <div class="form-group">
+                    <button class="btn btn-success col-md-12" (click)="confirmUpdate()" data-bs-dismiss="modal">Update Employee</button>
+                    
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>

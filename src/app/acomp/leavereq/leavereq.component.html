@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h2 class="mb-3 text-primary fw-bold text-center">Leave Requests</h2>
+  
+    <div class="table-responsive shadow-lg rounded"id="mytable">
+      <table class="table table-hover text-center align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Reason for Leave</th>
+            <th>Leave Start Date</th>
+            <th>Leave End Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let l of leavereq">
+            <td>{{ l.empid }}</td>
+            <td>{{ l.name }}</td>
+            <td>{{ l.reason }}</td>
+            <td>{{ l.startdate }}</td>
+            <td>{{ l.enddate }}</td>
+            <td *ngIf="l.status=='p'">
+              <button class="btn btn-success me-2 px-3 py-1 fw-bold" (click)="leaveAccepted(l.leaveId,true)" data-bs-dismiss="#mytable"><i class="bi bi-check-circle"></i> Accept</button>
+              <button class="btn btn-danger px-3 py-1 fw-bold" (click)="leaveAccepted(l.leaveId,false)" data-bs-dismiss="#mytable"><i class="bi bi-x-circle"></i> Reject</button>
+            </td>
+            <td *ngIf="l.status!='p'"> {{ l.status }}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

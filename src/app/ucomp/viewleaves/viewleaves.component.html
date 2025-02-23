@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <h3 class="text-center mb-4 text-primary">Leave Request Status</h3>
+
+  <p *ngIf="employeeMessage" class="alert alert-info text-center">
+      {{ employeeMessage }}
+  </p> 
+
+  <div class="table-responsive">
+      <table class="table table-hover shadow-sm">
+          <thead class="bg-primary text-white">
+              <tr class="text-center">
+                  <th>Employee ID</th>
+                  <th>Employee Name</th>
+                  <th>Reason for Leave</th>
+                  <th>Leave Start Date</th>
+                  <th>Leave End Date</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let l of myleaves" class="text-center align-middle">
+                  <td>{{ l.empid }}</td>
+                  <td>{{ l.name }}</td>
+                  <td>{{ l.reason }}</td>
+                  <td>{{ l.startdate | date:'longDate' }}</td>
+                  <td>{{ l.enddate | date:'longDate' }}</td>
+                  <td>
+                      <span class="badge" 
+                            [ngClass]="{
+                              'bg-warning text-dark': l.status === 'Pending',
+                              'bg-success': l.status === 'Approved',
+                              'bg-danger': l.status === 'Rejected'
+                            }">
+                          {{ l.status }}
+                      </span>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+

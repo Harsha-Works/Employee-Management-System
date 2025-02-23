@@ -1,0 +1,121 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      
+      <!-- Page Header -->
+      <h2 class="text-center mb-4 animated-title">
+          Employee Details
+      </h2>
+
+      <!-- Employee Details Card -->
+      <div class="col-md-10">
+          <div class="card employee-card">
+              <div class="row align-items-center">
+
+                  <!-- Image Section -->
+                  <div class="col-md-4 text-center">
+                      <img src="https://clipart-library.com/2023/464-4644415_employee-clipart-testimonial-illustration-hd-png-download.png" 
+                           alt="Employee Image" 
+                           class="img-fluid rounded-circle employee-image">
+                  </div>
+
+                  <!-- Employee Details -->
+                  <div class="col-md-8">
+                      <div class="px-3">
+                          <p class="mb-2"><strong>Employee ID:</strong> <span>{{ empDetails.empid }}</span></p>
+                          <p class="mb-2"><strong>Name:</strong> <span>{{ empDetails.name }}</span></p>
+                          <p class="mb-2"><strong>Role:</strong> <span>{{ empDetails.role }}</span></p>
+                          <p class="mb-2"><strong>Department:</strong> <span>{{ empDetails.department }}</span></p>
+                          <p class="mb-2"><strong>Contact:</strong> <span>{{ empDetails.contact }}</span></p>
+                          <p class="mb-2"><strong>Email:</strong> <span>{{ empDetails.email }}</span></p>
+                          <p class="mb-2"><strong>Salary:</strong> <span>{{ empDetails.salary }}</span></p>
+
+                          <!-- Buttons -->
+                          <div class="mt-4">
+                              <button type="button" class="btn btn-outline-primary animated-button me-2">
+                                  📄 View Payslip
+                              </button>
+
+                              <button type="button" class="btn btn-primary animated-button-apply"
+                                      data-bs-toggle="modal" data-bs-target="#leavemodal">
+                                   Apply for Leave
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+
+<!-- Modal for Leave Application Form -->
+<div class="modal fade" id="leavemodal" tabindex="-1" aria-labelledby="leavemodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">  <!-- Larger modal for better layout -->
+      <div class="modal-content shadow-lg rounded-4">  <!-- Soft shadow & rounded edges -->
+        <div class="modal-header bg-secondary text-white rounded-top-4">
+          <h4 class="modal-title" id="leavemodalLabel">Leave Application</h4>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body p-4">
+          <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+            
+            <div class="row g-3">  
+              <div class="col-md-6">
+                <label for="empid" class="form-label fw-bold">Employee Id</label>
+                <input type="text" class="form-control" formControlName="empid">
+              </div>
+              <div class="col-md-6">
+                <label for="ename" class="form-label fw-bold">Employee Name</label>
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+            </div>
+            
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="erole" class="form-label fw-bold">Employee Role</label>
+                <input type="text" class="form-control" formControlName="role">
+              </div>
+              <div class="col-md-6">
+                <label for="econt" class="form-label fw-bold">Employee Contact</label>
+                <input type="text" class="form-control" formControlName="contact">
+              </div>
+            </div>
+            
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="email" class="form-label fw-bold">Employee Email</label>
+                <input type="email" class="form-control" formControlName="email">
+              </div>
+              <div class="col-md-6">
+                <label for="reason" class="form-label fw-bold">Reason For Leave</label>
+                <input type="text" class="form-control" formControlName="reason" required>
+              </div>
+            </div>
+            
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="startdate" class="form-label fw-bold">Leave Start Date</label>
+                <input type="date" class="form-control" formControlName="startdate" required>
+              </div>
+              <div class="col-md-6">
+                <label for="enddate" class="form-label fw-bold">Leave End Date</label>
+                <input type="date" class="form-control" formControlName="enddate" required>
+              </div>
+            </div>
+  
+            <div class="mt-4 d-flex justify-content-end">
+              <button type="submit" class="btn btn-danger px-4 py-2 rounded-3 shadow" [disabled]="!leaveForm.valid" data-bs-dismiss="modal">
+                <i class="bi bi-check-circle"></i> Submit </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
